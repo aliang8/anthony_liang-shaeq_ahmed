@@ -1,5 +1,5 @@
-#ifndef PLAYLIST_H
-#define PLAYLIST_H
+#ifndef _PLAYLIST_H
+#define _PLAYLIST_H
 #include "song_node.h"
 
 void addsong(const char name[256], const char artist[256]);
@@ -12,4 +12,5 @@ int album_size();
 void shuffle(int i);
 void delete_song(const char name[256]);
 void delete_playlist();
+
 #endif

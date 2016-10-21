@@ -6,7 +6,7 @@
 
 int main(){ 
   //new table of linked list  
-  song_node *table[26];
+  //song_node *table[26];
   printf("Starting a new album...\n");
   int i;
   for(i=0;i<26;i++){

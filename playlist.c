@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include <time.h>
+#include <string.h>
 #include "playlist.h"
+#include "song_node.h"
 
 song_node *table[26];
 void addsong(const char name[256], const char artist[256]){

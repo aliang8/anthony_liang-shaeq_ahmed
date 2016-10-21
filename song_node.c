@@ -2,9 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <time.h>
 #include "song_node.h"
 
-song_node* errors(){
+song_node *errors(){
   song_node* error = (song_node *)malloc(sizeof(song_node));
   strcpy(error->name, "Error");
   strcpy(error->artist, "Not Found");
