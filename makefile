@@ -12,9 +12,10 @@ playlist.o: playlist.c playlist.h
 tunez.o: song_node.h playlist.h
 	$(GCC) -c main.c
 
-clean:
-	rm *.o
-	rm *~
-
 run: all
 	./albumtest
+
+clean:
+	rm *~
+	rm *.gch
+	rm *.o

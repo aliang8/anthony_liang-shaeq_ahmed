@@ -1,16 +1,17 @@
-#ifndef PLAYLIST_H
-#define PLAYLIST_H
+#ifndef PLAY_LIST_H
+#define PLAY_LIST_H
 #include "song_node.h"
 
-void addsong(const char name[256], const char artist[256]);
-song_node *search(const char name[256], const char artist[256]);
-song_node *search_for_artist(const char artist[256]);
+song_node *table[26];
+
+void add_song(char name[], char artist[]); 
+song_node * find_song(char name[]); 
+song_node * find_artist(char artist[]); 
+void print_artist(song_node *ptr, char artist[] ); 
 void print_entries(char letter);
-void print_by_artist(const char artist[256]);
-void print_album();
-int album_size();
-void shuffle(int i);
-void delete_song(const char name[256]);
-void delete_playlist();
+void print_album(); 
+void shuffle();
+void delete_song(char name[], char artist[]); 
+void delete_library(); 
 
 #endif

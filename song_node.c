@@ -1,147 +1,97 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
-#include <time.h>
 #include "song_node.h"
 
-song_node *errors(){
-  song_node* error = (song_node *)malloc(sizeof(song_node));
-  strcpy(error->name, "Error");
-  strcpy(error->artist, "Not Found");
-  return error;
-}
-
-char *lower(const char str[256]){
-  char *dest = (char *)malloc(strlen(str) + 1);
-  int i = 0;
-  while (str[i]){
-    dest[i] =tolower(str[i]);
-    i++;
-  }
-  return dest;
-}
-
-
-song_node *insert_front(song_node *ptr, const char name[256], const char artist[256]){
-  //parent node
+song_node *insert_front(song_node *ptr, char n[], char a[] ) {
   song_node *parent = (song_node *)malloc(sizeof(song_node));
-  strcpy(parent->name, lower(name));
-  strcpy(parent->artist, lower(artist));
   parent->next = ptr;
+  strcpy(parent->name, n);
+  strcpy(parent->artist, a);
   return parent;
 }
 
-song_node *insert_order(song_node *ptr, const char name[256], const char artist[256]){
-  song_node *song = (song_node *)malloc(sizeof(song_node));
-  strcpy(song->name, lower(name));
-  strcpy(song->artist, lower(artist));
-  if ( strcmp(song->artist,ptr->artist)<0 || (strcmp(song->artist,ptr->artist)==0 && (strcmp(song->name,ptr->name)<0)))  return insert_front(ptr,lower(name),lower(artist));
-  song_node* curr = ptr;
-  while(curr->next){
-
-    if (strcmp(song->artist,curr->next->artist)==0){
-      if (strcmp(song->name,curr->next->name)<0) {
-          
-	song->next = curr->next;
-	curr->next = song;
-	return ptr;  
-      }
-    }
-    else if ( strcmp(song->artist,curr->next->artist)<0  ){
-      
-      song->next = curr->next;
-      curr->next = song;
-      return ptr;
-    }
-    curr = curr->next;
-  }
-  curr->next = song; //song goes at end
+song_node *insert_order(song_node *ptr, char n[], char a[] ) {
+  song_node *tmp = ptr;
+  if (!tmp) return insert_front(tmp, n, a);
+  if(strcmp(a, tmp->artist) < 0) return insert_front(tmp, n, a);
+  if(strcmp(a, tmp->artist) == 0 && strcmp(n, tmp->name) < 0 )
+    return insert_front(tmp, n, a);
+  else
+    tmp->next = insert_order(tmp->next, n, a);
   return ptr;
 }
 
-song_node* song_search(song_node* ptr, const char name[256]){
-  song_node* curr = ptr;
-  while (curr){
-    if(strcmp(curr->name,lower(name)) == 0) 
-      return curr;
-    curr = curr->next;
+void print_list(song_node *ptr) {
+  song_node *tmp = ptr;
+  while(tmp) {
+    printf("\n* %s - %s", tmp->artist, tmp->name);
+    tmp = tmp->next;
   }
-  song_node* error = (song_node *)malloc(sizeof(song_node));
-  return (errors());
+  printf("\n");
 }
 
-
-song_node* song_search_by_artist(song_node* ptr, const char artist[256]){
-  song_node* curr = ptr;
-  while (curr){
-    if(strcmp(curr->artist,lower(artist)) == 0)
-      return curr;
-    curr = curr->next;
-  }
-  return errors();
+song_node *song_search(song_node *ptr, char n[]) {
+  song_node *tmp = ptr;
+  if(!tmp)
+    printf("\nError Not Found\n");
+  else if(strcmp(n, tmp->name) == 0)
+    return tmp;
+  else
+    return song_search(tmp->next, n);
+  return 0;
 }
 
-int size(song_node *ptr){
-  song_node* curr = ptr;
-  int i = 0;
-  while(curr->next){  
+song_node *song_search_by_artist(song_node* ptr, char a[]){
+  song_node *tmp = ptr;
+  while (tmp){
+    if(strcmp(tmp->artist,a) == 0)
+      return tmp;
+    tmp = tmp->next;
+  }
+  return 0;
+}
+
+int size(song_node *ptr) {
+  int i = 0; 
+  while(ptr) {
+    ptr = ptr->next;
     i++;
-    curr = curr->next;
-  } 
-  if (strcmp(curr->name,"")!=0) i++;
+  }
   return i;
 }
 
 song_node *random_song(song_node *ptr){
-  int r = rand() % size(ptr);
+  song_node *tmp = ptr;
+  int r = rand() % size(tmp);
   while(r){
-    ptr = ptr->next;
+    tmp = tmp->next;
     r--;
   }
   return ptr;
 }
 
-song_node *remove_song(song_node *ptr, const char name[256]){
-  song_node* song = song_search(ptr,name);
-  song_node* curr = ptr;
-  while (curr->next){
-    if (strcmp(curr->next->name,lower(name)) == 0){
-      curr->next = song->next;
+song_node *remove_song(song_node *ptr, char n[]){
+  song_node* song = song_search(ptr,n);
+  song_node* tmp = ptr;
+  while (tmp->next){
+    if (strcmp(tmp->next->name,n) == 0){
+      tmp->next = song->next;
       free(song);
       return ptr;
     }
-    curr = curr->next;
+    tmp = tmp->next;
   }
-  return errors();
-}
-
-void print_list(song_node *ptr){
-  if(size(ptr) == 0){
-    printf("Oops, this list is empty.\n");
-  } else {
-    printf("-> ");
-    while(ptr->next){
-      printf("%s - %s\n",ptr->artist,ptr->name);
-      printf("-> ");
-      ptr = ptr->next;
-    }
-    printf("%s - %s\n",ptr->artist, ptr->name);
-  }
-}
-
-void print_song(song_node *ptr){
-  printf(" -> ");
-  printf("%s - %s\n",ptr->artist,ptr->name);
+  return 0;
 }
 
 song_node *free_list(song_node *ptr){
-  song_node *curr = ptr;
+  song_node *tmp = ptr;
   while (ptr!=NULL) {
     ptr = ptr->next;
-    printf("Freeing node: %p\n", curr);
-    free(curr);
-    curr = ptr;    
+    printf("Freeing node: %p\n", tmp);
+    free(tmp);
+    tmp = ptr;    
   }
   return ptr;
 }
