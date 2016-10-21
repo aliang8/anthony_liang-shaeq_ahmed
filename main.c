@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "song_node.h"
 #include "playlist.h"
 
@@ -12,7 +13,7 @@ int main(){
   for(i=0;i<26;i++){
     table[i]=(song_node *)malloc(sizeof(song_node));
   }
-  printf("Adding some tracks...:\n");;
+  printf("Adding some tracks...:\n");
   addsong("Like a Rolling Stone","Bob Dylan");
   addsong("Satisfaction","Rolling Stones");
   addsong("Imagine","John Lennon");
