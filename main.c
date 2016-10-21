@@ -1,50 +1,47 @@
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <time.h>
 #include "playlist.h"
 
 int main(){ 
-  printf("adding some tracks...:\n");
-  addsong("like a rolling stone","bob dylan");
-  addsong("satisfaction","rolling stones");
-  addsong("imagine","john lennon");
-  addsong("what's going on","marvin gaye");
-  addsong("respect","aretha franklin");
-  addsong("good vibrations","beach boys");
-  addsong("johnny b. goode","chuck berry");
-  addsong("hey jude","beatles");
-  addsong("all star","smash mouth");
-  addsong("smells like teen spirit","nirvana");
-  addsong("what'd i say", "ray charles");
-  addsong("my generation","who");
-  addsong("a change is gonna come","same cooke");
-  addsong("yesterday","beatles");
-  addsong("london calling","the clash");
-  addsong("i want to hold your hand","beatles");
-  addsong("purple haze","jimmy hendrix");
-  addsong("hound dog","elvis presley");
-  addsong("in my life","beatles");
-  addsong("here come dat boi","a e s t h e t i c");
-  addsong("people got ready","depression");
-  addsong("god only knows","beach boys");
-  addsong("bo diddley","bo diddley");
-  addsong("california girls","beach boys");
-  addsong("superstition","stevie wonder");
+  //new table of linked list  
+  add_song("like a rolling stone","bob dylan");
+  add_song("satisfaction","rolling stones");
+  add_song("imagine","john lennon");
+  add_song("what's going on","marvin gaye");
+  add_song("respect","aretha franklin");
+  add_song("good vibrations","beach boys");
+  add_song("johnny b. goode","chuck berry");
+  add_song("hey jude","beatles");
+  add_song("all star","smash mouth");
+  add_song("smells like teen spirit","nirvana");
+  add_song("what'd i say", "ray charles");
+  add_song("my generation","who");
+  add_song("a change is gonna come","same cooke");
+  add_song("yesterday","beatles");
+  add_song("london calling","the clash");
+  add_song("i want to hold your hand","beatles");
+  add_song("purple haze","jimmy hendrix");
+  add_song("hound dog","elvis presley");
+  add_song("in my life","beatles");
+  add_song("here come dat boi","a e s t h e t i c");
+  add_song("people got ready","depression");
+  add_song("god only knows","beach boys");
+  add_song("bo diddley","bo diddley");
+  add_song("california girls","beach boys");
+  add_song("superstition","stevie wonder");
   print_album();
   printf("-------------------------------\n");
   
-    
-    
-  printf("%i\n", album_size());
   //song search function
   printf("searching for a song...:\n");
-  print_song(search("california girls","beach boys"));
+  //print_song(search("california girls"));
   printf("-------------------------------\n");
   
   //search by artist function
   printf("searching for artist...:\n");
-  print_song(search_for_artist("beatles"));
+  print_song(search_by_artist("beatles"));
   printf("-------------------------------\n");
   
   //print entries under certain letter
@@ -56,7 +53,7 @@ int main(){
   //print all songs by artist
   char artist[] = "beatles";
   printf("printing all songs by %s...:\n",artist);
-  print_by_artist(artist);
+  print_by_artist(table,artist);
   printf("-------------------------------\n");
   
   //shuffle function
@@ -66,20 +63,20 @@ int main(){
   
   //testing delete song function
   printf("testing delete song...: in my life\n\n");
-  delete_song("in my life");
+  delete_song("in my life","beatles");
   printf("album with song delted:\n");
   print_album();
   printf("-------------------------------\n");
   
   //testing free nodes function
   printf("freeing nodes...:\n");
-  //delete_playlist();
+  delete_playlist();
   //print_album();
   printf("-------------------------------\n");
   
   //song_node structure
   //////////////////////////////////////////////////////////////  
-  srand(time(null));
+  srand(time(NULL));
   //new linked list
   song_node * song_list = (song_node *)malloc(sizeof(song_node));
   //initialize album

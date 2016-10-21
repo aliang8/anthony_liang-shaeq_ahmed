@@ -47,6 +47,7 @@ void print_album() {
   }
 }
 
+
 void shuffle(int i) {
   srand(time(NULL));
   while (i) {

@@ -22,6 +22,11 @@ song_node *insert_order(song_node *ptr, char n[], char a[] ) {
   return ptr;
 }
 
+void print_song(song_node *ptr){
+  printf(" -> ");
+  printf("%s - %s\n",ptr->artist,ptr->name);
+}
+
 void print_list(song_node *ptr) {
   song_node *tmp = ptr;
   while(tmp) {
