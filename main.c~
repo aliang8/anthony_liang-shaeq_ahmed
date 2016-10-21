@@ -6,6 +6,8 @@
 
 int main(){ 
   //new table of linked list  
+  printf("Starting a sick playlist!!\n");
+  printf("-------------------------------\n");
   add_song("like a rolling stone","bob dylan");
   add_song("satisfaction","rolling stones");
   add_song("imagine","john lennon");
@@ -36,7 +38,7 @@ int main(){
   
   //song search function
   printf("searching for a song...:\n");
-  //print_song(search("california girls"));
+  print_song(search("california girls","beach boys"));
   printf("-------------------------------\n");
   
   //search by artist function
@@ -53,25 +55,24 @@ int main(){
   //print all songs by artist
   char artist[] = "beatles";
   printf("printing all songs by %s...:\n",artist);
-  print_by_artist(table,artist);
+  print_by_artist(artist);
   printf("-------------------------------\n");
   
   //shuffle function
   printf("testing shuffle...:\n");
-  //shuffle(10);
+  shuffle(10);
   printf("-------------------------------\n");
   
+  char song[] = "in my life";
+  char art[] = "beatles";
   //testing delete song function
-  printf("testing delete song...: in my life\n\n");
+  printf("testing delete song...: &s by %s\n",song,art);
   delete_song("in my life","beatles");
-  printf("album with song delted:\n");
-  print_album();
   printf("-------------------------------\n");
   
   //testing free nodes function
   printf("freeing nodes...:\n");
   delete_playlist();
-  //print_album();
   printf("-------------------------------\n");
   
   //song_node structure

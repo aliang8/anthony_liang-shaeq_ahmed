@@ -17,5 +17,4 @@ run: all
 
 clean:
 	rm *~
-	rm *.gch
 	rm *.o

@@ -25,11 +25,12 @@ song_node *search_by_artist(char a[]) {
   return tmp;
 }
 
-void print_by_artist(song_node *ptr, char a[]) {
-  song_node *tmp = song_search_by_artist(ptr,a);
-  while(tmp && strncmp(a, tmp->artist, 1) == 0) {
-    if(strcmp(tmp->artist, a) == 0)
-      printf("* %s - %s\n", tmp->artist, tmp->name);
+void print_by_artist(char a[]){
+  char letter = a[0];
+  song_node *tmp = song_search_by_artist(table[letter-97],a);
+  while(tmp){
+    if(strcmp(tmp->artist,a) == 0)
+      print_song(tmp);
     tmp = tmp->next;
   }
 }
@@ -46,7 +47,6 @@ void print_album() {
     i++;
   }
 }
-
 
 void shuffle(int i) {
   srand(time(NULL));

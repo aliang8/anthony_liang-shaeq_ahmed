@@ -23,23 +23,22 @@ song_node *insert_order(song_node *ptr, char n[], char a[] ) {
 }
 
 void print_song(song_node *ptr){
-  printf(" -> ");
-  printf("%s - %s\n",ptr->artist,ptr->name);
+  printf("* %s - %s\n",ptr->artist,ptr->name);
 }
 
 void print_list(song_node *ptr) {
   song_node *tmp = ptr;
   while(tmp) {
-    printf("\n* %s - %s", tmp->artist, tmp->name);
+    printf("* %s - %s\n", tmp->artist, tmp->name);
     tmp = tmp->next;
   }
-  printf("\n");
+  //printf("\n");
 }
 
 song_node *song_search(song_node *ptr, char n[]) {
   song_node *tmp = ptr;
   if(!tmp)
-    printf("\nError Not Found\n");
+    printf("Error Not Found\n");
   else if(strcmp(n, tmp->name) == 0)
     return tmp;
   else

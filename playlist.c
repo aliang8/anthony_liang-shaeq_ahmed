@@ -9,14 +9,10 @@ void add_song(char n[], char a[]) {
   table[letter] = insert_front(table[letter], n, a);
 }
 
-song_node *search(char n[]) {
-  int i = 0;
-  song_node *tmp = 0;
-  while(!tmp && i < 26){
-    tmp = song_search(table[i], n);
-    i++;
-  }
-  return tmp;
+song_node *search(char n[], char a[]){
+  char letter = a[0];
+  song_node *tmp = table[letter-97];
+  return song_search(tmp,n);  
 }
 
 song_node *search_by_artist(char a[]) {
@@ -25,11 +21,12 @@ song_node *search_by_artist(char a[]) {
   return tmp;
 }
 
-void print_by_artist(song_node *ptr, char a[]) {
-  song_node *tmp = song_search_by_artist(ptr,a);
-  while(tmp && strncmp(a, tmp->artist, 1) == 0) {
-    if(strcmp(tmp->artist, a) == 0)
-      printf("* %s - %s\n", tmp->artist, tmp->name);
+void print_by_artist(char a[]){
+  char letter = a[0];
+  song_node *tmp = song_search_by_artist(table[letter-97],a);
+  while(tmp){
+    if(strcmp(tmp->artist,a) == 0)
+      print_song(tmp);
     tmp = tmp->next;
   }
 }

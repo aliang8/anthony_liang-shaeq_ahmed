@@ -5,9 +5,9 @@
 song_node *table[26];
 
 void add_song(char name[], char artist[]); 
-song_node * search(char name[]); 
+song_node * search(char name[], char artist[]); 
 song_node * search_by_artist(char artist[]); 
-void print_artist(song_node *ptr, char artist[] ); 
+void print_by_artist(char artist[]);
 void print_entries(char letter);
 void print_album(); 
 void shuffle(int i);
