@@ -1,12 +1,20 @@
-all: song_node.o playlist.o
-	gcc song_node.o playlist.o -o album
-run: all
-	./album
+GCC = gcc -g
+
+all: song_node.o playlist.o main.o
+	$(GCC) playlist.o song_node.o main.o -o albumtest
+
 song_node.o: song_node.c song_node.h
-	gcc -c song_node.c
+	$(GCC) -c song_node.c
+
 playlist.o: playlist.c playlist.h
-	gcc -c playlist.c
+	$(GCC) -c playlist.c
+
+tunez.o: song_node.h playlist.h
+	$(GCC) -c main.c
+
 clean:
-	rm *~
 	rm *.o
- 
+	rm *~
+
+run: all
+	./albumtest

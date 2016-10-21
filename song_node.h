@@ -1,3 +1,6 @@
+#ifndef SONG_NODE_H
+#define SONG_NODE_H
+
 typedef struct song_node{
   char name[256];
   char artist[256];
@@ -16,3 +19,5 @@ song_node *remove_song(song_node *ptr, const char name[256]);
 void print_list(song_node *ptr);
 void print_song(song_node *ptr);
 song_node *free_list(song_node *ptr);
+
+#endif
