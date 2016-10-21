@@ -1,5 +1,5 @@
-#ifndef _SONG_NODE_H
-#define _SONG_NODE_H
+#ifndef SONG_NODE_H
+#define SONG_NODE_H
 
 typedef struct song_node{
   char name[256];

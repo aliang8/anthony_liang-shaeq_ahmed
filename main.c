@@ -6,9 +6,9 @@
 #include "playlist.h"
 
 int main(){ 
-  //new table of linked list  
-  song_node *table[26];
+  //new table of linked list 
   printf("Starting a new album...\n");
+  song_node *table[26];
   int i;
   for(i=0;i<26;i++){
     table[i]=(song_node *)malloc(sizeof(song_node));

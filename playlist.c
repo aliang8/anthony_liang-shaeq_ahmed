@@ -12,7 +12,7 @@ void addsong(const char name[256], const char artist[256]){
   song_node *curr = table[letter-97];
   if (size(curr) == 0){ // to avoid having dummy node at head
     strcpy(curr->name,lower(name));
-    strcpy(curr->artist,lower(artist));
+   strcpy(curr->artist,lower(artist));
   } else {
     table[letter-97] = insert_order(curr,name,artist);
   }
@@ -21,12 +21,12 @@ void addsong(const char name[256], const char artist[256]){
 song_node *search(const char name[256], const char artist[256]){
   char letter = tolower(artist[0]);
   song_node *curr = table[letter-97];
-  song_search(curr,name);   
+  return song_search(curr,name);   
 }
 
 song_node *search_for_artist(const char artist[256]){
   char letter = tolower(artist[0]);
-  song_search_by_artist(table[letter-97],artist);
+  return song_search_by_artist(table[letter-97],artist);
 }
 
 void print_entries(char letter){
